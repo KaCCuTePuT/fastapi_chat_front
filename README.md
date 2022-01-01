@@ -1,24 +1,19 @@
-# fa_training_front
+## Пробный чат на fastapi
 
-## Project setup
-```
-npm install
-```
+***
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Фронтенд для аналога Телеграмма.
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Реализовано на данный момент 
+* Регистрация по смс, авторизация
+* Чат на вебсокетах
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Планируется реализовать:
+* Редактирование профиля
+* Добавление, удаление друзей
+* Исправление недочетов
+
+### Используемый стек на данный момент:
+* Vue
+* Fastapi (в другом репозитории)
