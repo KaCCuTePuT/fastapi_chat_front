@@ -36,16 +36,25 @@
 
 <script>
 import sendVerificationCode from '@/api'
+import useVuelidate from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
 
 export default {
   name: 'Login',
   data() {
     return {
+      v$: useVuelidate(),
       phone: '+7',
       showCodeInput: false,
       disablePhone: false,
       codeFromUser: '',
       codeFromOurFunction: '',
+    }
+  },
+  validations() {
+    return {
+      phone: { required },
+      codeFromUser: { required },
     }
   },
   methods: {
@@ -60,11 +69,17 @@ export default {
       let phone = this.phone
       let verification_code1 = this.codeFromUser
       let verification_code2 = this.codeFromOurFunction
-      this.$store
-        .dispatch('login', { phone, verification_code1, verification_code2 })
-        .then(() => console.log('Вы залогинены'))
-        .catch((err) => console.log(err))
-      this.$router.push('/main')
+      this.v$.$validate()
+      if (!this.v$.$error) {
+        this.$store
+          .dispatch('login', { phone, verification_code1, verification_code2 })
+          .then(() => console.log('Вы залогинены'))
+          .catch((err) => console.log(err))
+        this.$router.push('/main')
+      } else {
+        console.log(this.v$.$errors)
+        alert('Заполните все поля')
+      }
     },
   },
 }
