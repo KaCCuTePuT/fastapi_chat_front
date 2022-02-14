@@ -263,7 +263,8 @@ export default {
         .then(() => this.loadFriends())
         .catch((r) => console.log(r.response.data))
       this.newFriendPhoneNumber = ''
-      this.$forceUpdate
+      this.phones = []
+      await this.loadFriends()
     },
   },
 }
