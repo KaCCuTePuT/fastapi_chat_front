@@ -220,8 +220,11 @@ export default {
       friendList.forEach((friend) => this.phones.push(friend.friend.phone))
     },
     async retrieveConv(phone) {
-      this.activeFriendPhoneNumber = phone
-      if (!this.wsConnection) {
+      if (this.activeFriendPhoneNumber !== phone) {
+        if (this.wsConnection) {
+          this.wsConnection.close()
+        }
+        this.activeFriendPhoneNumber = phone
         this.wsConnection = new WebSocket(
           `ws://localhost:8000/ws/${phone}/${this.token}`
         )
